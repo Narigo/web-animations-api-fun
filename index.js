@@ -13,11 +13,26 @@ const fadeIns = [
   },
   {
     keyframes: [
-      {transform: "translateX(-100%) translateY(0)"},
-      {transform: "translateX(-50%) translateY(-25%)"},
-      {transform: "translateX(-30%) translateY(0)"},
-      {transform: "translateX(-15%) translateY(25%)"},
-      {transform: "translateX(0) translateY(0)"}
+      {
+        opacity: 0,
+        transform: "translateX(-100%) translateY(0)"
+      },
+      {
+        opacity: .25,
+        transform: "translateX(-50%) translateY(-25%)"
+      },
+      {
+        opacity: .5,
+        transform: "translateX(-30%) translateY(0)"
+      },
+      {
+        opacity: .75,
+        transform: "translateX(-15%) translateY(25%)"
+      },
+      {
+        opacity: 1,
+        transform: "translateX(0) translateY(0)"
+      }
     ],
     options: {
       duration: 1000,
@@ -27,8 +42,14 @@ const fadeIns = [
   },
   {
     keyframes: [
-      {transform: "rotate(360deg) translate3D(100%, 0, 0)"},
-      {transform: "rotate(0deg) translate3D(0, 0, 0)"}
+      {
+        opacity: 0,
+        transform: "rotate(360deg) translate3D(100%, 0, 0)"
+      },
+      {
+        opacity: 1,
+        transform: "rotate(0deg) translate3D(0, 0, 0)"
+      }
     ],
     options: {
       duration: 1000,
@@ -51,11 +72,26 @@ const fadeOuts = [
   },
   {
     keyframes: [
-      {transform: "translateX(0) translateY(0)"},
-      {transform: "translateX(15%) translateY(-25%)"},
-      {transform: "translateX(30%) translateY(0)"},
-      {transform: "translateX(50%) translateY(25%)"},
-      {transform: "translateX(100%) translateY(0)"}
+      {
+        opacity: 1,
+        transform: "translateX(0) translateY(0)"
+      },
+      {
+        opacity: .75,
+        transform: "translateX(15%) translateY(-25%)"
+      },
+      {
+        opacity: .5,
+        transform: "translateX(30%) translateY(0)"
+      },
+      {
+        opacity: .25,
+        transform: "translateX(50%) translateY(25%)"
+      },
+      {
+        opacity: 0,
+        transform: "translateX(100%) translateY(0)"
+      }
     ],
     options: {
       duration: 1000,
@@ -65,8 +101,14 @@ const fadeOuts = [
   },
   {
     keyframes: [
-      {transform: "rotate(0deg) translate3D(0, 0, 0)"},
-      {transform: "rotate(360deg) translate3D(100%, 0, 0)"}
+      {
+        opacity: 1,
+        transform: "rotate(0deg) translate3D(0, 0, 0)"
+      },
+      {
+        opacity: 0,
+        transform: "rotate(360deg) translate3D(100%, 0, 0)"
+      }
     ],
     options: {
       duration: 1000,
@@ -76,12 +118,7 @@ const fadeOuts = [
   }
 ];
 
-const firstAnimation = {
-  ...fadeIns[0],
-  end: element => {
-    element.classList.add("active");
-  }
-};
+const firstAnimation = fadeIns[0];
 
 const currentAnimations = {
   oldElement: {},
@@ -91,6 +128,7 @@ const currentAnimations = {
 slides.forEach((el, idx) => {
   el.addEventListener("click", nextSlide(el, slides[(idx + 1) % slides.length]));
 });
+slides[0].classList.add("active");
 animate(slides[0], firstAnimation, "nextElement");
 
 function nextSlide(oldElement, nextElement) {

@@ -10,6 +10,20 @@
     html,body {
       width: 100%;
       height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #credits {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      max-width: 100%;
+      padding: 25px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      z-index: 3;
     }
 
     #animations {
@@ -51,6 +65,10 @@
   <div class="slide" id="slide-10"><img src="images/10.jpg" /></div>
   <div class="slide" id="slide-11"><img src="images/11.jpg" /></div>
   <div class="slide" id="slide-12"><img src="images/12.jpg" /></div>
+</div>
+<div id="credits">
+  <a class="left" href="https://www.instagram.com/lisi.line.art/">More images</a>
+  <a class="right" href="https://github.com/Narigo/web-animations-api-fun">See source</a>
 </div>
 <script src="index.js"></script>
 </body>
