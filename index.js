@@ -107,7 +107,7 @@ const fadeOuts = [
       },
       {
         opacity: 0,
-        transform: "rotate(360deg) translate3D(100%, 0, 0)"
+        transform: "rotate(-360deg) translate3D(100%, 0, 0)"
       }
     ],
     options: {
