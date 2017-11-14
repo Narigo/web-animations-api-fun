@@ -18,15 +18,12 @@ const fadeIns = [
         transform: "translateX(-100%) translateY(0)"
       },
       {
-        opacity: .25,
         transform: "translateX(-50%) translateY(-25%)"
       },
       {
-        opacity: .5,
         transform: "translateX(-30%) translateY(0)"
       },
       {
-        opacity: .75,
         transform: "translateX(-15%) translateY(25%)"
       },
       {
@@ -77,15 +74,12 @@ const fadeOuts = [
         transform: "translateX(0) translateY(0)"
       },
       {
-        opacity: .75,
         transform: "translateX(15%) translateY(-25%)"
       },
       {
-        opacity: .5,
         transform: "translateX(30%) translateY(0)"
       },
       {
-        opacity: .25,
         transform: "translateX(50%) translateY(25%)"
       },
       {
