@@ -3,95 +3,119 @@ const $text = document.getElementById("text");
 const leftText = "Web";
 const rightText = "Animations";
 
-const leftElements = createElements($text, leftText, 1);
-const rightElements = createElements($text, rightText, -1);
-
-const lefts = {
-  elements: leftElements,
-  width: leftElements.reduce((w, e) => e.width + w, 0)
-};
-
-const rights = {
-  elements: rightElements,
-  width: rightElements.reduce((w, e) => e.width + w, 0)
-};
-
-const ANIMATION_LENGTH = 5000;
-
-lefts.elements.forEach((element, idx) => {
-  if (0 < idx && idx < lefts.elements.length - 1) {
-    element.$span.animate([
-        {
-          transformOrigin: "center",
-          transform: `translate3D(0, 0, 0) rotate(${Math.round(element.percentage * 90)}deg)`,
-        },
-        {
-          transformOrigin: `center ${element.height - (element.height / 3)}px`,
-          transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0) rotate(0deg)`,
-        }
-      ],
-      {
-        duration: ANIMATION_LENGTH,
-        iterations: 1,
-        easing: "ease-out",
-        fill: "forwards"
-      });
-  } else {
-    element.$span.animate([
-      {
-        transformOrigin: "center",
-        transform: `translate3D(-${element.width}px, 0, 0)`,
-      },
-      {
-        transformOrigin: "center",
-        transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0)`,
-      }
-    ], {
-      duration: ANIMATION_LENGTH,
-      iterations: 1,
-      easing: "ease-out",
-      fill: "forwards"
-    });
-  }
+createAnimation($text, leftText, rightText).start(1000).then((animations) => {
+  console.log("done!");
+  animations.forEach(anim => anim.reverse());
 });
 
-rights.elements.forEach((element, idx) => {
-  if (0 < idx && idx < rights.elements.length - 1) {
-    console.log("percentage", element.$span.innerHTML, element.percentage);
-    element.$span.animate([
-        {
-          transformOrigin: `center`,
-          transform: `translate3D(0, 0, 0) rotate(${-Math.round((1 - element.percentage) * 90)}deg)`,
-        },
-        {
-          transformOrigin: `center ${element.height - (element.height / 3)}px`,
-          transform: `translate3D(${element.left}px, 0, 0) rotate(0deg)`,
-        }
-      ],
-      {
-        duration: ANIMATION_LENGTH,
-        iterations: 1,
-        easing: "ease-out",
-        fill: "forwards"
+function createAnimation($text, leftText, rightText) {
+  const leftElements = createElements($text, leftText, 1);
+  const rightElements = createElements($text, rightText, -1);
+
+  const lefts = {
+    elements: leftElements,
+    width: leftElements.reduce((w, e) => e.width + w, 0)
+  };
+
+  const rights = {
+    elements: rightElements,
+    width: rightElements.reduce((w, e) => e.width + w, 0)
+  };
+
+  return {
+    start(animationLength) {
+      return new Promise(resolve => {
+        let animationsCounter = lefts.elements.length + rights.elements.length;
+        const animations = [];
+        const done = (animation) => {
+          animations.push(animation);
+          animationsCounter--;
+          if (animationsCounter <= 0) {
+            resolve(animations);
+          }
+        };
+
+        lefts.elements.forEach((element, idx) => {
+          let animation = null;
+          if (0 < idx && idx < lefts.elements.length - 1) {
+            animation = element.$span.animate([
+                {
+                  transformOrigin: "center",
+                  transform: `translate3D(0, 0, 0) rotate(${Math.round(element.percentage * 90)}deg)`,
+                },
+                {
+                  transformOrigin: `center ${element.height - (element.height / 3)}px`,
+                  transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0) rotate(0deg)`,
+                }
+              ],
+              {
+                duration: animationLength,
+                iterations: 1,
+                easing: "ease-out",
+                fill: "forwards"
+              });
+          } else {
+            animation = element.$span.animate([
+              {
+                transformOrigin: "center",
+                transform: `translate3D(-${element.width}px, 0, 0)`,
+              },
+              {
+                transformOrigin: "center",
+                transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0)`,
+              }
+            ], {
+              duration: animationLength,
+              iterations: 1,
+              easing: "ease-out",
+              fill: "forwards"
+            });
+          }
+          animation.onfinish = () => done(animation);
+        });
+
+        rights.elements.forEach((element, idx) => {
+          let animation = null;
+          if (0 < idx && idx < rights.elements.length - 1) {
+            animation = element.$span.animate([
+                {
+                  transformOrigin: `center`,
+                  transform: `translate3D(0, 0, 0) rotate(${-Math.round((1 - element.percentage) * 90)}deg)`,
+                },
+                {
+                  transformOrigin: `center ${element.height - (element.height / 3)}px`,
+                  transform: `translate3D(${element.left}px, 0, 0) rotate(0deg)`,
+                }
+              ],
+              {
+                duration: animationLength,
+                iterations: 1,
+                easing: "ease-out",
+                fill: "forwards"
+              });
+          } else {
+            animation = element.$span.animate([
+              {
+                transformOrigin: "center",
+                transform: "translate3D(0, 0, 0)",
+              },
+              {
+                transformOrigin: "center",
+                transform: `translate3D(${element.left}px, 0, 0)`,
+              }
+            ], {
+              duration: animationLength,
+              iterations: 1,
+              easing: "ease-out",
+              fill: "forwards"
+            });
+          }
+          animation.onfinish = () => done(animation);
+        });
       });
-  } else {
-    element.$span.animate([
-      {
-        transformOrigin: "center",
-        transform: "translate3D(0, 0, 0)",
-      },
-      {
-        transformOrigin: "center",
-        transform: `translate3D(${element.left}px, 0, 0)`,
-      }
-    ], {
-      duration: ANIMATION_LENGTH,
-      iterations: 1,
-      easing: "ease-out",
-      fill: "forwards"
-    });
-  }
-});
+    }
+  };
+}
 
 function createElements($outerWrap, text, x) {
   const $wrapper = document.createElement("span");
