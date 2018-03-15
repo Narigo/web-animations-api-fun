@@ -1,14 +1,4 @@
-const $text = document.getElementById("text");
-
-const leftText = "Web";
-const rightText = "Animations";
-
-createAnimation($text, leftText, rightText).start(1000).then((animations) => {
-  console.log("done!");
-  animations.forEach(anim => anim.reverse());
-});
-
-function createAnimation($text, leftText, rightText) {
+export function createAnimation($text, leftText, rightText) {
   const leftElements = createElements($text, leftText, 1);
   const rightElements = createElements($text, rightText, -1);
 
@@ -128,7 +118,6 @@ function splitIntoElements($wrapper, text, x) {
   const $firstSpan = toSpan(letters[0], 0);
   $wrapper.append($firstSpan);
   $firstSpan.style.position = "absolute";
-  $firstSpan.style.backgroundColor = "#fff";
   $firstSpan.style.zIndex = letters.length * 2 + 1;
   const firstElement = {
     left: 0,
@@ -142,7 +131,6 @@ function splitIntoElements($wrapper, text, x) {
       const lastElement = acc[acc.length - 1];
       const $span = toSpan(letter, idx + 1);
       $span.style.position = "absolute";
-      $span.style.backgroundColor = "#fff";
       $span.style.zIndex = (idx < letters.length - 2 ? (letters.length - idx * x) : letters.length * 2);
       $wrapper.append($span);
       return [

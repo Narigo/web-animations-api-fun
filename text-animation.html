@@ -15,5 +15,18 @@
 <div id="text">
 </div>
 <script type="module" src="text-animation.js"></script>
+<script type="module">
+  import {createAnimation} from "./text-animation.js";
+
+  const $text = document.getElementById("text");
+
+  const leftText = "Web";
+  const rightText = "Animations";
+
+  createAnimation($text, leftText, rightText).start(1000).then((animations) => {
+    console.log("done!");
+    animations.forEach(anim => anim.reverse());
+  });
+</script>
 </body>
 </html>
