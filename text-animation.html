@@ -19,13 +19,26 @@
 
   const $text = document.getElementById("text");
 
-  const leftText = "Web";
-  const rightText = "Animations";
+  const texts = [
+    {left: "Happy", right: "Birthday"},
+    {left: "Web", right: "Animations"},
+    {left: "Something", right: "Textable"},
+  ];
 
-  createAnimation($text, leftText, rightText).start(1000).then((animations) => {
-    console.log("done!");
-    animations.forEach(anim => anim.reverse());
-  });
+  texter();
+
+  function texter() {
+    const {left, right} = texts[Math.floor(Math.random() * texts.length)];
+
+    $text.innerHTML = "";
+    createAnimation($text, left, right).start(1000).then((animations) => {
+      console.log("done!");
+      return Promise.all(animations.map(anim => new Promise(resolve => {
+        anim.reverse();
+        anim.onfinish = resolve;
+      })));
+    }).then(texter);
+  }
 </script>
 </body>
 </html>

@@ -118,6 +118,7 @@ function splitIntoElements($wrapper, text, x) {
   const $firstSpan = toSpan(letters[0], 0);
   $wrapper.append($firstSpan);
   $firstSpan.style.position = "absolute";
+  $firstSpan.style.backgroundColor = "#fff";
   $firstSpan.style.zIndex = letters.length * 2 + 1;
   const firstElement = {
     left: 0,
@@ -131,6 +132,7 @@ function splitIntoElements($wrapper, text, x) {
       const lastElement = acc[acc.length - 1];
       const $span = toSpan(letter, idx + 1);
       $span.style.position = "absolute";
+      $span.style.backgroundColor = "#fff";
       $span.style.zIndex = (idx < letters.length - 2 ? (letters.length - idx * x) : letters.length * 2);
       $wrapper.append($span);
       return [
