@@ -14,6 +14,11 @@
 <body>
 <div id="text">
 </div>
+<div id="add-text">
+  <input type="text" id="add-left-text" placeholder="Add left text" />
+  <input type="text" id="add-right-text" placeholder="Add right text" />
+  <button type="button" id="add-text-btn">Add text</button>
+</div>
 <script type="module">
   import {createAnimation} from "./text-animation.js";
 
@@ -22,7 +27,7 @@
   const texts = [
     {left: "Happy", right: "Birthday"},
     {left: "Web", right: "Animations"},
-    {left: "Something", right: "Textable"},
+    {left: "Something", right: "Textable"}
   ];
 
   texter();
