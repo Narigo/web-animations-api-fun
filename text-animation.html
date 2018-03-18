@@ -18,19 +18,28 @@
   <input type="text" id="add-left-text" placeholder="Add left text" />
   <input type="text" id="add-right-text" placeholder="Add right text" />
   <button type="button" id="add-text-btn">Add text</button>
+  <h2>Existing Texts:</h2>
+  <ul id="existing-texts">
+  </ul>
 </div>
 <script type="module">
   import {createAnimation} from "./text-animation.js";
 
   const $text = document.getElementById("text");
 
-  const texts = [
+  let texts = [
     {left: "Happy", right: "Birthday"},
     {left: "Web", right: "Animations"},
     {left: "Something", right: "Textable"}
   ];
 
+  showExistingTexts();
   texter();
+
+  function showExistingTexts() {
+    const $existingTexts = document.getElementById("existing-texts");
+    $existingTexts.innerHTML = texts.map(text => `<li>${text.left} ${text.right}</li>`).join("");
+  }
 
   function texter() {
     const {left, right} = texts[Math.floor(Math.random() * texts.length)];
