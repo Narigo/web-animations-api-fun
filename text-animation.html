@@ -25,6 +25,10 @@
 <script type="module">
   import {createAnimation} from "./text-animation.js";
 
+  const $addTextButton = document.getElementById("add-text-btn");
+  const $addLeftText = document.getElementById("add-left-text");
+  const $addRightText = document.getElementById("add-right-text");
+
   const $text = document.getElementById("text");
 
   let texts = [
@@ -32,6 +36,16 @@
     {left: "Web", right: "Animations"},
     {left: "Something", right: "Textable"}
   ];
+
+  $addTextButton.onclick = () => {
+    const left = $addLeftText.value.trim();
+    const right = $addRightText.value.trim();
+    if (left !== "" && right !== "") {
+      $addLeftText.value = "";
+      $addRightText.value = "";
+      texts.push({left, right});
+    }
+  };
 
   showExistingTexts();
   texter();
