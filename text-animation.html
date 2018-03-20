@@ -32,8 +32,6 @@
   const $text = document.getElementById("text");
 
   let texts = [
-    {left: "Happy", right: "Birthday"},
-    {left: "Web", right: "Animations"},
     {left: "Something", right: "Textable"}
   ];
 
@@ -44,6 +42,7 @@
       $addLeftText.value = "";
       $addRightText.value = "";
       texts.push({left, right});
+      showExistingTexts();
     }
   };
 
