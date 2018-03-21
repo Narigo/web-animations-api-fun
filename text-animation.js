@@ -1,3 +1,5 @@
+const BACKGROUND_COLOR = "#ffffff";
+
 export function createAnimation($text, leftText, rightText) {
   const leftElements = createElements($text, leftText, 1);
   const rightElements = createElements($text, rightText, -1);
@@ -36,6 +38,10 @@ export function createAnimation($text, leftText, rightText) {
                 {
                   transformOrigin: `center ${element.height - (element.height / 3)}px`,
                   transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0) rotate(0deg)`,
+                },
+                {
+                  transformOrigin: `center ${element.height - (element.height / 3)}px`,
+                  transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0) rotate(0deg)`,
                 }
               ],
               {
@@ -49,6 +55,10 @@ export function createAnimation($text, leftText, rightText) {
               {
                 transformOrigin: "center",
                 transform: `translate3D(-${element.width}px, 0, 0)`,
+              },
+              {
+                transformOrigin: "center",
+                transform: `translate3D(${element.left - lefts.width - 10}px, 0, 0)`,
               },
               {
                 transformOrigin: "center",
@@ -75,6 +85,10 @@ export function createAnimation($text, leftText, rightText) {
                 {
                   transformOrigin: `center ${element.height - (element.height / 3)}px`,
                   transform: `translate3D(${element.left}px, 0, 0) rotate(0deg)`,
+                },
+                {
+                  transformOrigin: `center ${element.height - (element.height / 3)}px`,
+                  transform: `translate3D(${element.left}px, 0, 0) rotate(0deg)`,
                 }
               ],
               {
@@ -88,6 +102,10 @@ export function createAnimation($text, leftText, rightText) {
               {
                 transformOrigin: "center",
                 transform: "translate3D(0, 0, 0)",
+              },
+              {
+                transformOrigin: "center",
+                transform: `translate3D(${element.left}px, 0, 0)`,
               },
               {
                 transformOrigin: "center",
@@ -118,7 +136,7 @@ function splitIntoElements($wrapper, text, x) {
   const $firstSpan = toSpan(letters[0], 0);
   $wrapper.append($firstSpan);
   $firstSpan.style.position = "absolute";
-  $firstSpan.style.backgroundColor = "#fff";
+  $firstSpan.style.backgroundColor = BACKGROUND_COLOR;
   $firstSpan.style.zIndex = letters.length * 2 + 1;
   const firstElement = {
     left: 0,
@@ -132,7 +150,7 @@ function splitIntoElements($wrapper, text, x) {
       const lastElement = acc[acc.length - 1];
       const $span = toSpan(letter, idx + 1);
       $span.style.position = "absolute";
-      $span.style.backgroundColor = "#fff";
+      $span.style.backgroundColor = BACKGROUND_COLOR;
       $span.style.zIndex = (idx < letters.length - 2 ? (letters.length - idx * x) : letters.length * 2);
       $wrapper.append($span);
       return [
