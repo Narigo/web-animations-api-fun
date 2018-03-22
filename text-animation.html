@@ -51,7 +51,15 @@
 
   function showExistingTexts() {
     const $existingTexts = document.getElementById("existing-texts");
-    $existingTexts.innerHTML = texts.map(text => `<li>${text.left} ${text.right}</li>`).join("");
+    $existingTexts.innerHTML = texts.map(text => `<li class="existing-text">${text.left} ${text.right}</li>`).join("");
+    $existingTexts.querySelectorAll(".existing-test").forEach((elem, idx) => {
+      console.log("registering onclick", idx, elem);
+      elem.onclick = () => {
+        console.log("onclick", idx, elem);
+        texts = texts.slice(0, idx).concat(texts.slice(idx + 1));
+        showExistingTexts();
+      }
+    });
   }
 
   function texter() {
