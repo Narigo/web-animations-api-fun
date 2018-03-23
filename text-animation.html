@@ -52,7 +52,7 @@
   function showExistingTexts() {
     const $existingTexts = document.getElementById("existing-texts");
     $existingTexts.innerHTML = texts.map(text => `<li class="existing-text">${text.left} ${text.right}</li>`).join("");
-    $existingTexts.querySelectorAll(".existing-test").forEach((elem, idx) => {
+    $existingTexts.querySelectorAll(".existing-text").forEach((elem, idx) => {
       console.log("registering onclick", idx, elem);
       elem.onclick = () => {
         console.log("onclick", idx, elem);
