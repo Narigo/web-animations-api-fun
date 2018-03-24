@@ -53,9 +53,7 @@
     const $existingTexts = document.getElementById("existing-texts");
     $existingTexts.innerHTML = texts.map(text => `<li class="existing-text">${text.left} ${text.right}</li>`).join("");
     $existingTexts.querySelectorAll(".existing-text").forEach((elem, idx) => {
-      console.log("registering onclick", idx, elem);
       elem.onclick = () => {
-        console.log("onclick", idx, elem);
         texts = texts.slice(0, idx).concat(texts.slice(idx + 1));
         showExistingTexts();
       }
@@ -67,7 +65,6 @@
 
     $text.innerHTML = "";
     createAnimation($text, left, right).start(1000).then((animations) => {
-      console.log("done!");
       return Promise.all(animations.map(anim => new Promise(resolve => {
         anim.reverse();
         anim.onfinish = resolve;
