@@ -8,6 +8,20 @@
       position: relative;
       text-align: center;
       font-size: xx-large;
+      padding: 25px;
+    }
+
+    #add-text {
+      margin-top: 5em;
+      border-top: 1px solid #CCCCCC;
+      position: relative;
+      text-align: center;
+    }
+
+    #existing-texts {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
     }
   </style>
 </head>
@@ -15,8 +29,10 @@
 <div id="text">
 </div>
 <div id="add-text">
-  <input type="text" id="add-left-text" placeholder="Add left text" />
-  <input type="text" id="add-right-text" placeholder="Add right text" />
+  <div>
+    <input type="text" id="add-left-text" placeholder="Add left text" />
+    <input type="text" id="add-right-text" placeholder="Add right text" />
+  </div>
   <button type="button" id="add-text-btn">Add text</button>
   <h2>Existing Texts:</h2>
   <ul id="existing-texts">
