@@ -67,7 +67,9 @@
 
   function showExistingTexts() {
     const $existingTexts = document.getElementById("existing-texts");
-    $existingTexts.innerHTML = texts.map(text => `<li class="existing-text">${text.left} ${text.right}</li>`).join("");
+    $existingTexts.innerHTML = texts.map(text =>
+      `<li class="existing-text"><span class="left">${text.left}</span> <span class="right">${text.right}</span></li>`
+    ).join("");
     $existingTexts.querySelectorAll(".existing-text").forEach((elem, idx) => {
       elem.onclick = () => {
         texts = texts.slice(0, idx).concat(texts.slice(idx + 1));
