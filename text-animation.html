@@ -34,6 +34,7 @@
     <input type="text" id="add-right-text" placeholder="Add right text" />
   </div>
   <button type="button" id="add-text-btn">Add text</button>
+  <input type="number" id="duration" value="1000" />
   <h2>Existing Texts:</h2>
   <ul id="existing-texts">
   </ul>
@@ -47,6 +48,8 @@
 
   const $text = document.getElementById("text");
 
+  const $duration = document.getElementById("duration");
+  let duration = 1000;
   let texts = [
     {left: "Something", right: "Textable"}
   ];
@@ -60,6 +63,10 @@
       texts.push({left, right});
       showExistingTexts();
     }
+  };
+
+  $duration.onchange = () => {
+    duration = Math.max(10, parseInt($duration.value));
   };
 
   showExistingTexts();
@@ -82,7 +89,7 @@
     const {left, right} = texts[Math.floor(Math.random() * texts.length)];
 
     $text.innerHTML = "";
-    createAnimation($text, left, right).start(1000).then((animations) => {
+    createAnimation($text, left, right).start(duration).then((animations) => {
       return Promise.all(animations.map(anim => new Promise(resolve => {
         anim.reverse();
         anim.onfinish = resolve;
