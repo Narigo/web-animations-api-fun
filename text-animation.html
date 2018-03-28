@@ -53,6 +53,7 @@
   let texts = [
     {left: "Something", right: "Textable"}
   ];
+  let running = false;
 
   $addTextButton.onclick = () => {
     const left = $addLeftText.value.trim();
@@ -62,6 +63,9 @@
       $addRightText.value = "";
       texts.push({left, right});
       showExistingTexts();
+      if (!running) {
+        texter();
+      }
     }
   };
 
@@ -86,15 +90,20 @@
   }
 
   function texter() {
-    const {left, right} = texts[Math.floor(Math.random() * texts.length)];
+    if (texts.length > 0) {
+      running = true;
+      const {left, right} = texts[Math.floor(Math.random() * texts.length)];
 
-    $text.innerHTML = "";
-    createAnimation($text, left, right).start(duration).then((animations) => {
-      return Promise.all(animations.map(anim => new Promise(resolve => {
-        anim.reverse();
-        anim.onfinish = resolve;
-      })));
-    }).then(texter);
+      $text.innerHTML = "";
+      createAnimation($text, left, right).start(duration).then((animations) => {
+        return Promise.all(animations.map(anim => new Promise(resolve => {
+          anim.reverse();
+          anim.onfinish = resolve;
+        })));
+      }).then(texter);
+    } else {
+      running = false;
+    }
   }
 </script>
 </body>
